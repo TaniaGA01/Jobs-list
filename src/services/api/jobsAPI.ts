@@ -24,7 +24,7 @@ const created = async () => {
 }
 created();
 
-export const apiEmploy = axios.create({
+export const apiJobs = axios.create({
   baseURL: 'https://api.emploi-store.fr/partenaire/offresdemploi',
   headers: {
     'Authorization': `Bearer v-5tvYeeN1vkvK0IENvP33HtTFI`,

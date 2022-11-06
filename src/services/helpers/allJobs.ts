@@ -53,7 +53,7 @@ export default class service {
                 pagesValue.forEach(element => {
                     if (element) {
                         getPaginationDivContent.style.position = `absolute`
-                        getPaginationDivContent.style.right = `0`
+                        getPaginationDivContent.style.right = `1px`
                     }
                 })
             }
@@ -70,10 +70,10 @@ export default class service {
             const getPaginationDiv = document.querySelector('.pagination') as HTMLElement
 
             if (page.value === 2) {
-                getPaginationDiv.style.width = '50px'
+                getPaginationDiv.style.width = '51px'
             }
             if (page.value === 3) {
-                getPaginationDiv.style.width = '100px'
+                getPaginationDiv.style.width = '101px'
             }
             if (page.value !== 1) {
                 page.value -= 1;
@@ -85,7 +85,7 @@ export default class service {
             page.value = numPage;
             const getPaginationDiv = document.querySelector('.pagination') as HTMLElement
             if (page.value === 1) {
-                getPaginationDiv.style.width = '50px'
+                getPaginationDiv.style.width = '51px'
             }
             translatePagination()
         };
@@ -93,10 +93,10 @@ export default class service {
         const firstOnes = () => {
             const getPaginationDiv = document.querySelector('.pagination') as HTMLElement
             if (page.value === 2) {
-                getPaginationDiv.style.width = '100px'
+                getPaginationDiv.style.width = '101px'
             }
             if (page.value === 3) {
-                getPaginationDiv.style.width = '150px'
+                getPaginationDiv.style.width = '151px'
             }
 
             if (page.value) {
@@ -105,16 +105,16 @@ export default class service {
             translatePagination()
         }
 
-        const getLastOne = () => {
+        const lastOne = () => {
             const getPaginationDiv = document.querySelector('.pagination') as HTMLElement
             if (page.value === Math.ceil(respData.length / perPage)) {
-                getPaginationDiv.style.width = '150px'
+                getPaginationDiv.style.width = '151px'
             }
             return Math.ceil(respData.length / perPage)
         }
 
         return {
-            respData, paginatedData, lastPage, perPage, page, nextPage, backPage, goToPage, firstOnes, getLastOne
+            respData, paginatedData, lastPage, perPage, page, nextPage, backPage, goToPage, firstOnes, lastOne
         };
     }
 

@@ -1,5 +1,5 @@
 
-export const employsFakers = [
+export const jobsFakers = [
 
 
     {

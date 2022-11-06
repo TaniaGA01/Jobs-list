@@ -1,7 +1,7 @@
 import type { employInterfaceAPIINterface } from '../interfaces/employ.interfaces'
 import type { apiErrorInterface } from '../interfaces/errorAPI.interfaces'
-// import { apiEmploy } from '../api/employAPI'
-import { employsFakers } from '../fakers/employsFakers'
+// import { apiJobs } from '../api/jobsAPI'
+import { jobsFakers } from '../fakers/jobsFakers'
 
 export const createJobsList = async (): Promise<(employInterfaceAPIINterface | apiErrorInterface)> => {
   try {
@@ -11,7 +11,7 @@ export const createJobsList = async (): Promise<(employInterfaceAPIINterface | a
     //   datas: response.data.resultats
     // } 
     return {
-      datas: employsFakers
+      datas: jobsFakers
     }
   } catch (error) {
     return {
