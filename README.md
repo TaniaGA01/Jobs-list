@@ -1,7 +1,9 @@
 # Jobs-list
 
 Search and pagination development project with Vue 3 + TailWind + TypeScript
+```sh
 See this project here https://jobs-liste.netlify.app/
+```
 
 ## Project Setup
 
