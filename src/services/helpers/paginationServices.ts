@@ -1,22 +1,8 @@
-import { onMounted, reactive, ref, computed, onBeforeMount } from "vue"
+import { reactive, ref, computed, onBeforeMount } from "vue"
 import { createJobsList } from '../helpers/getJobsConnexion'
 
-interface IData {
-    jobs: object[],
-    sortJobsGroup: object[]
-}
 
 export default class service {
-
-    data = reactive<IData>({
-        jobs: [],
-        sortJobsGroup: []
-    })
-
-    jobService = onMounted(async (): Promise<void> => {
-        const response = await createJobsList()
-        this.data.jobs = response.datas
-    })
 
     handlePagination = () => {
 
@@ -36,14 +22,14 @@ export default class service {
         const perPage = 9;
 
         const paginatedData = computed(() =>
-            respData.slice((page.value - 1) * perPage, page.value * perPage)// list of 9
+            respData.slice((page.value - 1) * perPage, page.value * perPage)
         );
 
         const lastPage = computed(() =>
             Math.ceil(respData.length / perPage)
         );
 
-        const translatePagination = () => {
+        const translatePagination = (): void => {
             const getPaginationDivContent = document.querySelector('.pagination-content') as HTMLElement
             getPaginationDivContent.style.transition = 'all 0.25s ease 0s'
             const pagesValue = []
@@ -59,14 +45,14 @@ export default class service {
             }
         }
 
-        const nextPage = () => {
+        const nextPage = (): void => {
             if (page.value !== Math.ceil(respData.length / perPage)) {
                 page.value += 1;
             }
             translatePagination()
         };
 
-        const backPage = () => {
+        const backPage = (): void => {
             if (page.value !== 1) {
                 page.value -= 1;
             }
@@ -78,21 +64,22 @@ export default class service {
             translatePagination()
         };
 
-        const firstOnes = () => {
+        const firstOnes = (): any => {
             if (page.value) {
                 return Math.ceil(respData.length / perPage)
             }
             translatePagination()
         }
 
-        const MiddleOnes = () => {
+        const MiddleOnes = (): any => {
             if (page.value) {
                 return Math.ceil(page.value)
             }
             translatePagination()
+
         }
 
-        const lastOne = () => {
+        const lastOne = (): number => {
             return Math.ceil(respData.length / perPage)
         }
 
