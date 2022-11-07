@@ -18,7 +18,7 @@ const created = async () => {
       realm: '/partenaire'
     },
   };
-  const response = await fetch("https://entreprise.pole-emploi.fr/connexion/oauth2/v-5tvYeeN1vkvK0IENvP33HtTFI", requestOptions);
+  const response = await fetch("https://entreprise.pole-emploi.fr/connexion/oauth2/here-code-pin", requestOptions);
   response
 
 }
@@ -27,7 +27,7 @@ created();
 export const apiJobs = axios.create({
   baseURL: 'https://api.emploi-store.fr/partenaire/offresdemploi',
   headers: {
-    'Authorization': `Bearer v-5tvYeeN1vkvK0IENvP33HtTFI`,
+    'Authorization': `Bearer here-code-pin`,
     'content-type': 'application/x-www-form-urlencoded',
   }
 })

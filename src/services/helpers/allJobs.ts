@@ -67,14 +67,6 @@ export default class service {
         };
 
         const backPage = () => {
-            const getPaginationDiv = document.querySelector('.pagination') as HTMLElement
-
-            if (page.value === 2) {
-                getPaginationDiv.style.width = '51px'
-            }
-            if (page.value === 3) {
-                getPaginationDiv.style.width = '101px'
-            }
             if (page.value !== 1) {
                 page.value -= 1;
             }
@@ -83,22 +75,17 @@ export default class service {
 
         const goToPage = (numPage: number) => {
             page.value = numPage;
-            const getPaginationDiv = document.querySelector('.pagination') as HTMLElement
-            if (page.value === 1) {
-                getPaginationDiv.style.width = '51px'
-            }
             translatePagination()
         };
 
         const firstOnes = () => {
-            const getPaginationDiv = document.querySelector('.pagination') as HTMLElement
-            if (page.value === 2) {
-                getPaginationDiv.style.width = '101px'
+            if (page.value) {
+                return Math.ceil(respData.length / perPage)
             }
-            if (page.value === 3) {
-                getPaginationDiv.style.width = '151px'
-            }
+            translatePagination()
+        }
 
+        const MiddleOnes = () => {
             if (page.value) {
                 return Math.ceil(page.value)
             }
@@ -106,15 +93,11 @@ export default class service {
         }
 
         const lastOne = () => {
-            const getPaginationDiv = document.querySelector('.pagination') as HTMLElement
-            if (page.value === Math.ceil(respData.length / perPage)) {
-                getPaginationDiv.style.width = '151px'
-            }
             return Math.ceil(respData.length / perPage)
         }
 
         return {
-            respData, paginatedData, lastPage, perPage, page, nextPage, backPage, goToPage, firstOnes, lastOne
+            respData, paginatedData, lastPage, perPage, page, nextPage, backPage, goToPage, firstOnes, MiddleOnes, lastOne
         };
     }
 

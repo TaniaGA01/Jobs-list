@@ -45,7 +45,7 @@ const getPaginateData = reactive(dataJobs.handlePagination());
                             <span class="text-indigo-600">{{ getPaginateData.page }}</span>
                             {{ ' ' }} de {{ ' ' }}
                             <span class="text-indigo-600">{{ Math.ceil(getPaginateData.respData.length / getPaginateData.perPage)
-                                }}</span>
+                            }}</span>
                             {{ ' ' }} - {{ ' ' }}
                             <span class="text-indigo-600">{{ getPaginateData.respData.length }}</span>
                             {{ ' ' }} annonces
@@ -60,11 +60,18 @@ const getPaginateData = reactive(dataJobs.handlePagination());
                             </a>
                             <div class="pagination">
                                 <div class="pagination-content">
-                                    <a href="#" v-for="item in getPaginateData.firstOnes()" :key="item"
-                                        @click="getPaginateData.goToPage(item)"
-                                        :class="[getPaginateData.page === item ? 'relative z-10 inline-flex items-center border border-indigo-500 bg-indigo-50 px-4 py-2 text-sm font-medium text-indigo-600 focus:z-20': 'relative inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20']">{{
-                                        item }}
-                                    </a>
+                                    <div v-for="(item, ind) in getPaginateData.firstOnes()" :key="item">
+                                        <a v-if="ind < 3" href="#" @click="getPaginateData.goToPage(item)"
+                                            :class="[getPaginateData.page === item ? 'relative z-10 inline-flex items-center border border-indigo-500 bg-indigo-50 px-4 py-2 text-sm font-medium text-indigo-600 focus:z-20': 'relative inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20']">{{
+                                            item}}
+                                        </a>
+                                    </div>
+                                    <div v-for="(item, ind) in getPaginateData.MiddleOnes()" :key="item">
+                                        <a href="#" v-if="ind > 2" @click="getPaginateData.goToPage(item)"
+                                            :class="[getPaginateData.page === item ? 'relative z-10 inline-flex items-center border border-indigo-500 bg-indigo-50 px-4 py-2 text-sm font-medium text-indigo-600 focus:z-20': 'relative inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20']">{{
+                                            item }}
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                             <span
@@ -89,7 +96,7 @@ const getPaginateData = reactive(dataJobs.handlePagination());
 
 <style scoped>
 .pagination {
-    width: 51px;
+    width: 151px;
     height: 38px;
     contain: strict;
     display: flex;
