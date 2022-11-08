@@ -1,19 +1,16 @@
 <script setup lang="ts">
-import PaginationServices from "../services/helpers/paginationServices"
-import { reactive } from 'vue';
-
-const paginationServices = new PaginationServices();
-const getPaginateData = reactive(paginationServices.handlePagination());
-
-const props = defineProps({
-    firstOnes: Function,
-    goToPage: Function,
-    currentPage: Number,
-    MiddleOnes: Function,
-    nextPage: Function,
-    backPage: Function
-});
-
+    const props = defineProps({
+        respData: Array,
+        perPage: Number,
+        firstPage: Number,
+        firstOnes: Function,
+        middleOnes: Function,
+        lastPage: Number,
+        currentPage: Number,
+        goToPage: Function,
+        nextPage: Function,
+        backPage: Function
+    });
 </script>
 <template>
     <!-- <Pagination /> -->
@@ -30,18 +27,23 @@ const props = defineProps({
                     Page {{ ' ' }}
                     <span class="text-indigo-600">{{ props.currentPage }}</span>
                     {{ ' ' }} de {{ ' ' }}
-                    <span class="text-indigo-600">{{ Math.ceil(getPaginateData.respData.length /
-                    getPaginateData.perPage)
+                    <span class="text-indigo-600">{{ Math.ceil(props.respData.length /
+                    props.perPage)
                     }}</span>
                     {{ ' ' }} - {{ ' ' }}
-                    <span class="text-indigo-600">{{ getPaginateData.respData.length }}</span>
+                    <span class="text-indigo-600">{{ props.respData.length }}</span>
                     {{ ' ' }} annonces
                 </p>
             </div>
             <div>
                 <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
-                    <a href="#" @click="props.backPage"
+                    <a href="#" @click="props.firstPage()"
                         class="relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20">
+                        <span class="sr-only">Première</span>
+                        <span class="text-gray-400"> {{ `<<` }} </span>
+                    </a>
+                    <a href="#" @click="props.backPage"
+                        class="relative inline-flex items-center border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20">
                         <span class="sr-only">Précedente</span>
                         <span class="text-gray-400"> {{ `<` }} </span>
                     </a>
@@ -53,7 +55,7 @@ const props = defineProps({
                                     item}}
                                 </a>
                             </div>
-                            <div v-for="(item, idx) in props.MiddleOnes" :key="item">
+                            <div v-for="(item, idx) in props.middleOnes" :key="item">
                                 <a href="#" v-if="idx > 2" @click="props.goToPage(item)"
                                     :class="[props.currentPage === item ? 'relative z-10 inline-flex items-center border border-indigo-500 bg-indigo-50 px-4 py-2 text-sm font-medium text-indigo-600 focus:z-20': 'relative inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20']">{{
                                     item }}
@@ -64,9 +66,9 @@ const props = defineProps({
                     <span
                         class="relative inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700">...
                     </span>
-                    <a href="#" @click="props.goToPage(getPaginateData.lastPage)"
+                    <a href="#" @click="props.goToPage(props.lastPage())"
                         class="relative inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20">
-                        {{ getPaginateData.lastOne() }}
+                        {{ props.lastPage() }}
                     </a>
                     <a href="#" @click="props.nextPage"
                         class="relative inline-flex items-center rounded-r-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20">

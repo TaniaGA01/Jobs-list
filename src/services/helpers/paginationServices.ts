@@ -25,10 +25,6 @@ export default class service {
             respData.slice((page.value - 1) * perPage, page.value * perPage)
         );
 
-        const lastPage = computed(() =>
-            Math.ceil(respData.length / perPage)
-        );
-
         const translatePagination = (): void => {
             const getPaginationDivContent = document.querySelector('.pagination-content') as HTMLElement
             getPaginationDivContent.style.transition = 'all 0.25s ease 0s'
@@ -64,6 +60,10 @@ export default class service {
             translatePagination()
         };
 
+        const firstPage = (): number => {
+            return Math.ceil(page.value = 1)
+        }
+
         const firstOnes = (): any => {
             if (page.value) {
                 return Math.ceil(respData.length / perPage)
@@ -71,7 +71,7 @@ export default class service {
             translatePagination()
         }
 
-        const MiddleOnes = (): any => {
+        const middleOnes = (): any => {
             if (page.value) {
                 return Math.ceil(page.value)
             }
@@ -79,12 +79,12 @@ export default class service {
 
         }
 
-        const lastOne = (): number => {
+        const lastPage = (): number => {
             return Math.ceil(respData.length / perPage)
         }
 
         return {
-            respData, paginatedData, lastPage, perPage, page, nextPage, backPage, goToPage, firstOnes, MiddleOnes, lastOne
+            respData, paginatedData, perPage, page, nextPage, backPage, goToPage, firstPage, firstOnes, middleOnes, lastPage
         };
     }
 

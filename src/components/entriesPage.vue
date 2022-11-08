@@ -10,14 +10,6 @@ const getPaginateData = reactive(paginationServices.handlePagination());
 <template>
     <div class="pb-12">
         <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 ">
-            <Pagination
-                :firstOnes="getPaginateData.firstOnes()"
-                :MiddleOnes="getPaginateData.MiddleOnes()"
-                :goToPage="getPaginateData.goToPage"
-                :currentPage="getPaginateData.page"
-                :nextPage="getPaginateData.nextPage"
-                :backPage="getPaginateData.backPage"
-            />
             <div class="static max-sm:pt-12 grid grid-cols-3 gap-4 max-sm:grid-cols-1 mt-8 max-sm:mt-1">
                 <div v-for="job in getPaginateData.paginatedData" :key="job.id" :id="`${job.id}`" class="bg-white p-12 rounded-lg border border-indigo-500">
                     <p class="text-sm text-gray-500">Intitulé du poste</p>
@@ -38,9 +30,18 @@ const getPaginateData = reactive(paginationServices.handlePagination());
                     </div>
                 </div>
             </div>
-            <!-- <Pagination :firstOnes="getPaginateData.firstOnes()" :MiddleOnes="getPaginateData.MiddleOnes()"
-                :goToPage="getPaginateData.goToPage" :currentPage="getPaginateData.page" :nextPage="getPaginateData.nextPage"
-                :backPage="getPaginateData.backPage" /> -->
+            <Pagination 
+            :respData="getPaginateData.respData"
+            :perPage="getPaginateData.perPage"
+            :firstPage="getPaginateData.firstPage"
+            :firstOnes="getPaginateData.firstOnes()" 
+            :middleOnes="getPaginateData.middleOnes()"
+            :lastPage="getPaginateData.lastPage"
+            :currentPage="getPaginateData.page" 
+            :goToPage="getPaginateData.goToPage"
+            :nextPage="getPaginateData.nextPage"
+            :backPage="getPaginateData.backPage" 
+            />
         </div>
     </div>
 </template>
